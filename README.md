@@ -3,7 +3,6 @@
 A simple SwiftUI demo showcasing Apple's Foundation Models framework for detecting and applying message corrections. Built to explore the `@Generable` and `@Guide` macros for structured AI outputs.
 
 > *"still playing with FoundationModels, made a little messages demo tonight that picks up when you try to correct yourself. the generable and guide macros make it super easy to steer the ai's output. really straightforward for building small, reliable structured outputs"*
-> 
 > — [Tweet](https://x.com/AetherAurelia/status/1935123747771400404)
 
 ## 🎯 What This Demonstrates
@@ -34,7 +33,7 @@ The key is using `@Generable` and `@Guide` to get structured outputs:
 
 ```swift
 @Generable
-struct MessageCorrectionGenerable {
+struct MessageCorrection {
     @Guide(description: "The COMPLETE corrected sentence. If a correction is detected, return the FULL original sentence with the corrected part replaced. If no correction is made, return the original Previous Message unchanged. NEVER return just the correction word alone.")
     let message: String
 
@@ -48,7 +47,7 @@ struct MessageCorrectionGenerable {
 let session = LanguageModelSession(instructions: instructions)
 let response = try await session.respond(
     to: prompt,
-    generating: MessageCorrectionGenerable.self,
+    generating: MessageCorrection.self,
     includeSchemaInPrompt: true
 )
 ```
